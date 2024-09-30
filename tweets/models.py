@@ -13,6 +13,11 @@ class Tweet(CommonModel):
     def __str__(self):
         return f"Tweet: {{ user: {self.user}, tweet: {self.payload}, created_at: {super().created_str()}}}"
 
+    def like_count(self):
+        return self.likes.count()
+
+    like_count.short_description = "Number of Likes"
+
 
 class Like(CommonModel):
     """Like Model Definition"""
