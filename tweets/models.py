@@ -27,5 +27,11 @@ class Like(CommonModel):
         "users.User", on_delete=models.CASCADE, related_name="likes"
     )
 
+    def tweet_message(self):
+        return self.tweet.payload[:20]
+
+    def tweet_author(self):
+        return self.tweet.user.username
+
     def __str__(self):
         return f"Like: {{ user: {self.user}, tweet: {self.tweet}, created_at: {super().created_str()}}}"
