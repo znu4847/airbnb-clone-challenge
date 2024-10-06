@@ -9,6 +9,9 @@ class User(AbstractUser):
     name = models.CharField(max_length=150, default="", editable=True)
     is_host = models.BooleanField(default=False)
 
+    def tweets_count(self):
+        return self.tweets.count()
+
     def __str__(self):
         if self.name:
             return f"{self.username} ({self.name})"

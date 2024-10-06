@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Tweet
+from .models import User
 
 
 class TweetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tweet
+        model = User
         fields = [
-            "pk",
-            "payload",
+            "username",
+            "tweets_count",
         ]
