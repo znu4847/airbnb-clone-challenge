@@ -9,7 +9,11 @@ class CustomUserAdmin(UserAdmin):
         (
             "Profile",
             {
-                "fields": ("username", "password", "name", "email", "is_host"),
+                "fields": (
+                    "username",
+                    "name",
+                    "email",
+                ),
                 "classes": ("wide",),
             },
         ),
@@ -26,14 +30,26 @@ class CustomUserAdmin(UserAdmin):
                 "classes": ("collapse",),
             },
         ),
+    )
+
+    list_display = (
+        "username",
+        "email",
+        "name",
+    )
+
+    add_fieldsets = (
         (
-            "Important Dates",
+            "Add User",
             {
-                "fields": ("last_login", "date_joined"),
-                "classes": ("collapse",),
+                "classes": ("wide",),
+                "fields": (
+                    "username",
+                    "email",
+                    "name",
+                    "password1",
+                    "password2",
+                ),
             },
         ),
     )
-
-    list_display = ("username", "email", "name", "is_host")
-    list_editable = ("name", "is_host")

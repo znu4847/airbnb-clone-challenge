@@ -14,7 +14,6 @@ class TheGuyFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        print(request.GET)
         if self.value() == "hide":
             return queryset.exclude(payload__icontains="Elon Musk")
         return queryset

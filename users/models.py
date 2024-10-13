@@ -6,8 +6,9 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     first_name = models.CharField(max_length=150, editable=False)
     last_name = models.CharField(max_length=150, editable=False)
+    password = models.CharField(max_length=128, editable=False)
     name = models.CharField(max_length=150, default="", editable=True)
-    is_host = models.BooleanField(default=False)
+    avatar = models.URLField(blank=True)
 
     def tweets_count(self):
         return self.tweets.count()

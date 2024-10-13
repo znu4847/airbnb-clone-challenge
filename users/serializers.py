@@ -1,11 +1,56 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, ValidationError
 from .models import User
 
 
-class TweetSerializer(serializers.ModelSerializer):
+class TinyUserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = [
             "username",
+            "name",
+            "email",
+            "avatar",
+        ]
+
+
+class PrivateUserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        exclude = [
+            "id",
+            "is_superuser",
+            "is_staff",
+            "is_active",
+            "first_name",
+            "last_name",
+            "user_permissions",
+            "groups",
+        ]
+
+    def validate_username(self, value):
+        return value
+
+    def validate(self, data):
+        return data
+
+
+class UserTweetsSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
             "tweets_count",
         ]
+
+
+class UserPasswordSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            "password",
+        ]
+
+    def validate_password(self, value):
+        if len(value) < 8:
+            raise ValidationError("Password is too short")
+        return value
